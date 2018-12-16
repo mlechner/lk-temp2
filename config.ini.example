@@ -4,3 +4,5 @@ sleeptime=1
 base_dir=/sys/bus/w1/devices/
 device_folder=28*
 device_file=/w1_slave
+[development]
+debug=1

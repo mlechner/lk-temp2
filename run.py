@@ -11,6 +11,8 @@ import RPi.GPIO as GPIO
 class LKTemp2App:
     def __init__(self, *args, **kwargs):
         self.config = Config().get_config()
+        self.development = self.config['development'] if 'development' in self.config else None
+        self.debug = bool(self.development['debug']) if self.development and 'debug' in self.development and bool(self.development['debug']) else False
         self.timeconf = self.config['time']
         self.deviceconf = self.config['device']
         self.sleeptime = float(self.timeconf['sleeptime'])
@@ -53,16 +55,18 @@ class LKTemp2App:
         equals_pos = self.lines[1].find('t=')
         if equals_pos != -1:
             temp_string = self.lines[1][equals_pos+2:]
+            if self.debug:
+                print(temp_string)
             self.temp_c = float(temp_string) / 1000.0
 
     # Hauptprogrammschleife
     # Die gemessene Temperatur wird in die Konsole ausgegeben - zwischen den einzelnen Messungen
-    # ist eine Pause, deren Länge mit der Variable "sleeptime" eingestellt werden kann
+    # ist eine Pause, deren Länge mit der config "sleeptime" eingestellt werden kann
     def run(self):
         try:
             while True:
                 self.temperature_analysis()
-                print "Temperatur:", self.temp_c, "°C"
+                print("Temperatur:", self.temp_c, "°C")
                 time.sleep(self.sleeptime)
         except KeyboardInterrupt:
             self.GPIO.cleanup()
