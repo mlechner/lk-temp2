@@ -57,7 +57,7 @@ class LKTemp2App:
             temp_string = self.lines[1][equals_pos+2:]
             self.temp_c = float(temp_string) / 1000.0
             if self.debug:
-                print('## Debug ##')
+                print('## Debug Begin ##')
                 print(self.lines[1])
                 print(self.temp_c)
                 print('## Debug End ##')
@@ -69,7 +69,7 @@ class LKTemp2App:
         try:
             while True:
                 self.temperature_analysis()
-                print("Temperatur:", self.temp_c, "°C")
+                print("Temperatur: " + str(self.temp_c) + "°C")
                 time.sleep(self.sleeptime)
         except KeyboardInterrupt:
             self.GPIO.cleanup()
