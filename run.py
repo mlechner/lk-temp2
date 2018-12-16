@@ -23,7 +23,7 @@ class LKTemp2App:
         self.GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         # Nach Aktivierung des Pull-UP Widerstandes wird gewartet,
         # bis die Kommunikation mit dem DS18B20 Sensor aufgebaut ist
-        print 'Warte auf Initialisierung...'
+        print("Warte auf Initialisierung...")
         while True:
             try:
                 self.device_folder = glob.glob(self.base_dir + self.deviceconf['device_folder'])[0]
@@ -55,9 +55,12 @@ class LKTemp2App:
         equals_pos = self.lines[1].find('t=')
         if equals_pos != -1:
             temp_string = self.lines[1][equals_pos+2:]
-            if self.debug:
-                print(temp_string)
             self.temp_c = float(temp_string) / 1000.0
+            if self.debug:
+                print('## Debug ##')
+                print(self.lines[1])
+                print(self.temp_c)
+                print('## Debug End ##')
 
     # Hauptprogrammschleife
     # Die gemessene Temperatur wird in die Konsole ausgegeben - zwischen den einzelnen Messungen
