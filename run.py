@@ -13,7 +13,7 @@ class LKTemp2App:
         self.config = Config().get_config()
         self.timeconf = self.config['time']
         self.deviceconf = self.config['device']
-        self.sleeptime = self.timeconf['sleeptime']
+        self.sleeptime = float(self.timeconf['sleeptime'])
         self.base_dir = self.deviceconf['base_dir']
         # Der One-Wire EingangsPin wird deklariert und der integrierte PullUp-Widerstand aktiviert
         self.GPIO = GPIO
