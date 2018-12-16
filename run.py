@@ -39,8 +39,6 @@ class LKTemp2App:
     def temperature_reading(self):
         f = open(self.device_file, 'r')
         self.lines = f.readlines()
-        for line in self.lines:
-            print(line)
         f.close()
 
     # Die Temperaturauswertung: Beim Raspberry Pi werden erkannte one-Wire Slaves im Ordner
@@ -63,7 +61,8 @@ class LKTemp2App:
     def run(self):
         try:
             while True:
-                print "Temperatur:", self.temperature_analysis(), "°C"
+                self.temperature_analysis()
+                print "Temperatur:", self.temp_c, "°C"
                 time.sleep(self.sleeptime)
         except KeyboardInterrupt:
             self.GPIO.cleanup()
