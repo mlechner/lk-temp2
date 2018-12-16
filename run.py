@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# Benoetigte Module werden importiert und eingerichtet
 import glob
 import time
 from time import sleep
 import RPi.GPIO as GPIO
-
 # An dieser Stelle kann die Pause zwischen den einzelnen Messungen eingestellt werden
 sleeptime = 1
 # Der One-Wire EingangsPin wird deklariert und der integrierte PullUp-Widerstand aktiviert
@@ -23,7 +22,6 @@ while True:
         sleep(0.5)
         continue
 device_file = device_folder + '/w1_slave'
-
 # Funktion wird definiert, mit dem der aktuelle Messwert am Sensor ausgelesen werden kann
 def TemperaturMessung():
     f = open(device_file, 'r')
@@ -32,8 +30,7 @@ def TemperaturMessung():
     return lines
 # Zur Initialisierung, wird der Sensor einmal "blind" ausgelesen
 TemperaturMessung()
-
-# Die Temperaturauswertung: Beim Raspberry Pi werden erkennte on-Wire Slaves im Ordner
+# Die Temperaturauswertung: Beim Raspberry Pi werden erkennte one-Wire Slaves im Ordner
 # /sys/bus/w1/devices/ einem eigenen Unterordner zugeordnet. In diesem Ordner befindet sich die Datei w1-slave
 # in dem Die Daten, die über dem One-Wire Bus gesendet wurden gespeichert.
 # In dieser Funktion werden diese Daten analysiert und die Temperatur herausgelesen und ausgegeben
@@ -47,7 +44,6 @@ def TemperaturAuswertung():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         return temp_c
-
 # Hauptprogrammschleife
 # Die gemessene Temperatur wird in die Konsole ausgegeben -zwischen den einzelnen Messungen
 # ist eine Pause, deren Länge mit der Variable "sleeptime" eingestellt werden kann
