@@ -52,5 +52,5 @@ try:
         print "Temperatur:", TemperaturAuswertung(), "°C"
         time.sleep(sleeptime)
 except KeyboardInterrupt:
-    PIO.cleanup()
+    GPIO.cleanup()
 
